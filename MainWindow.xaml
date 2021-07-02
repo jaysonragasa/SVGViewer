@@ -1,0 +1,33 @@
+﻿<Window x:Class="SVGViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:svgc="clr-namespace:SVGImage.SVG"
+        mc:Ignorable="d"
+        Title="SVG Viewer"
+        Height="450"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Window.Background>
+        <VisualBrush TileMode="Tile"
+                     ViewportUnits="Absolute"
+                     Viewport="0,0,256,256">
+            <VisualBrush.Visual>
+                <Image Source="Resources/transgrid.jpg"
+                       Stretch="Uniform" />
+            </VisualBrush.Visual>
+        </VisualBrush>
+    </Window.Background>
+    <Grid>
+        <Grid Margin="20">
+            <TextBlock Text="Drag SVG file here" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" x:Name="lblDragFileHere" />
+            <svgc:SVGImage x:Name="svgCanv"
+                           SizeType="ContentToSizeNoStretch"
+                           Background="Transparent"
+                           Padding="10"
+                           />
+        </Grid>
+    </Grid>
+</Window>
