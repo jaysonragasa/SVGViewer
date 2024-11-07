@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetProjects.SVGImage, Version=5.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetProjects.SVGImage.5.2.2\lib\net48\DotNetProjects.SVGImage.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -56,56 +59,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="SVGFile.cs" />
-    <Compile Include="SVGImage\Animation\Animate.cs" />
-    <Compile Include="SVGImage\Animation\AnimateColor.cs" />
-    <Compile Include="SVGImage\Animation\AnimateMotion.cs" />
-    <Compile Include="SVGImage\Animation\AnimateTransform.cs" />
-    <Compile Include="SVGImage\Animation\AnimateTransformType.cs" />
-    <Compile Include="SVGImage\Animation\AnimationBase.cs" />
-    <Compile Include="SVGImage\ClipArtElement.cs" />
-    <Compile Include="SVGImage\CSS\StyleItem.cs" />
-    <Compile Include="SVGImage\CSS\StyleParser.cs" />
-    <Compile Include="SVGImage\FileLoaders\FileSystemLoader.cs" />
-    <Compile Include="SVGImage\FileLoaders\IExternalFileLoader.cs" />
-    <Compile Include="SVGImage\Fill.cs" />
-    <Compile Include="SVGImage\PaintServer\CurrentColorPaintServer.cs" />
-    <Compile Include="SVGImage\PaintServer\GradientColorPaintServer.cs" />
-    <Compile Include="SVGImage\PaintServer\InheritPaintServer.cs" />
-    <Compile Include="SVGImage\PaintServer\LinearGradientColorPaintServer.cs" />
-    <Compile Include="SVGImage\PaintServer\PaintServer.cs" />
-    <Compile Include="SVGImage\PaintServer\PaintServerManager.cs" />
-    <Compile Include="SVGImage\PaintServer\PatternPaintServer.cs" />
-    <Compile Include="SVGImage\PaintServer\RadialGradientColorPaintServer.cs" />
-    <Compile Include="SVGImage\PaintServer\SolidColorPaintServer.cs" />
-    <Compile Include="SVGImage\Shapes\CircleShape.cs" />
-    <Compile Include="SVGImage\Shapes\Clip.cs" />
-    <Compile Include="SVGImage\Shapes\EllipseShape.cs" />
-    <Compile Include="SVGImage\Shapes\Filter\Filter.cs" />
-    <Compile Include="SVGImage\Shapes\Filter\FilterBaseFe.cs" />
-    <Compile Include="SVGImage\Shapes\Filter\FilterFeGaussianBlur.cs" />
-    <Compile Include="SVGImage\Shapes\Group.cs" />
-    <Compile Include="SVGImage\Shapes\ImageShape.cs" />
-    <Compile Include="SVGImage\Shapes\LineShape.cs" />
-    <Compile Include="SVGImage\Shapes\PathShape.cs" />
-    <Compile Include="SVGImage\Shapes\PolygonShape.cs" />
-    <Compile Include="SVGImage\Shapes\PolylineShape.cs" />
-    <Compile Include="SVGImage\Shapes\RectangleShape.cs" />
-    <Compile Include="SVGImage\Shapes\Shape.cs" />
-    <Compile Include="SVGImage\Shapes\Text.cs" />
-    <Compile Include="SVGImage\Shapes\UseShape.cs" />
-    <Compile Include="SVGImage\ShapeUtil.cs" />
-    <Compile Include="SVGImage\Stroke.cs" />
-    <Compile Include="SVGImage\SVG.cs" />
-    <Compile Include="SVGImage\SVGFeatures.cs" />
-    <Compile Include="SVGImage\SvgIconBase.cs" />
-    <Compile Include="SVGImage\SvgIconConverterExtension.cs" />
-    <Compile Include="SVGImage\SvgIconExtension.cs" />
-    <Compile Include="SVGImage\SVGImage.cs" />
-    <Compile Include="SVGImage\SVGRender.cs" />
-    <Compile Include="SVGImage\SVGTags.cs" />
-    <Compile Include="SVGImage\TextRender.cs" />
-    <Compile Include="SVGImage\TextStyle.cs" />
-    <Compile Include="SVGImage\Visibility.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -137,6 +90,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
