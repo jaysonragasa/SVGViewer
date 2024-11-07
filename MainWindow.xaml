@@ -42,6 +42,7 @@
 					x:Name="lblDragFileHere" />
 				<svgc:SVGImage
 					x:Name="svgCanv"
+					SizeType="ContentToSizeNoStretch"
 					Background="Transparent"
 					Padding="10" />
 			</Grid>
