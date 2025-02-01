@@ -1,8 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace SVGViewer
@@ -35,32 +37,61 @@ namespace SVGViewer
             }
         }
 
-        private void MainWindow_Drop(object sender, DragEventArgs e)
+        private async void MainWindow_Drop(object sender, DragEventArgs e)
         {
-            if(e.Data.GetDataPresent(DataFormats.FileDrop))
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 var files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
                 if (files.Any())
                 {
                     this.Files.Clear();
+
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+						progressBar.IsIndeterminate = true;
+						progressBar.Maximum = files.Length;
+					});
                     
-                    foreach (var file in files)
+                    List<SVGFile> svgs = new List<SVGFile>();
+
+					//foreach (var file in files)
+					for (int i = 0; i < files.Length; i++)
                     {
                         // make sure it is SVG
-                        if(Path.GetExtension(file).ToLower() == ".svg")
+                        if (Path.GetExtension(files[i]).ToLower() == ".svg")
                         {
-                            var svg = new SVGFile(file);
-                            this.Files.Add(svg);
+                            var svg = new SVGFile(files[i]);
+                            svgs.Add(svg);
                         }
+
+                        //await Application.Current.Dispatcher.InvokeAsync(async () =>
+                        //{
+                        //    progressBar.Value = i + 1;
+                        //    await Task.Delay(1);
+                        //});
+
+                        //await Task.Delay(1);
                     }
 
-                    if (this.Files.Any())
-                    {
-                        this.svgCanv.SetImage(this.Files.FirstOrDefault().SVGImage);
-                        lblDragFileHere.Visibility = Visibility.Hidden;
-                    }
-                }
+                    foreach (var file in svgs)
+                        this.Files.Add(file);
+
+					await Application.Current.Dispatcher.InvokeAsync(async () =>
+					{
+						if (svgs.Any())
+						{
+							this.svgCanv.SetImage(svgs.FirstOrDefault().SVGImage);
+							progressMessage.Visibility = Visibility.Hidden;
+						}
+
+						progressBar.IsIndeterminate = false;
+						await Task.Delay(1);
+					});
+
+                    svgs.Clear();
+                    svgs = null;
+				}
             }
         }
 
@@ -71,5 +102,29 @@ namespace SVGViewer
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
         #endregion
+
+        private void txtSearch_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            this.svgCanv.Visibility = Visibility.Visible;
+
+            string tosearch = txtSearch.Text;
+            if (string.IsNullOrEmpty(tosearch))
+            {
+                this.svgCanv.Visibility = Visibility.Hidden;
+				return;
+            }
+
+            var itemtosel = this.Files.Where(x => x.Filename.ToLower().Contains(tosearch)).FirstOrDefault();
+
+            if (itemtosel is null)
+            {
+				this.svgCanv.Visibility = Visibility.Hidden;
+				return;
+            };
+
+            lvFiles.SelectedItem = itemtosel;
+            lvFiles.ScrollIntoView(itemtosel);
+            lvFiles.SelectedValue = itemtosel;
+        }
     }
 }
